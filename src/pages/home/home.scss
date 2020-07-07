@@ -1,0 +1,34 @@
+.layout {
+  background-color: grey;
+  height: 100vh;
+}
+
+.layout-core {
+  background-color: #333232;
+  height: 100vh;
+  margin: 0px 250px 0px 250px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.img-container {
+  margin: 10px;
+  width: 200px;
+  height: 200px;
+  border: solid 1px yellow;
+}
+
+.card {
+  margin: 40px;
+  width: 220px;
+  height: 300px;
+  border: solid 1px yellow;
+}
+
+.card-text {
+  margin: 10px;
+  color: white;
+}
