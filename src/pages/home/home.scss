@@ -32,3 +32,15 @@
   margin: 10px;
   color: white;
 }
+
+.btn-load {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}
+
+.btns-container {
+  display: grid;
+  justify-content: end;
+  grid-template-columns: 90% 10%;
+}

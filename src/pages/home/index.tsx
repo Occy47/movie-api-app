@@ -1,6 +1,9 @@
 import * as React from "react";
 import MovieCard from "./components/MovieCard";
 import "./home.scss";
+import RoundButton from "./components/RoundButton";
+import Shuffle from "../../images/shuffle-icon.png";
+import Load from "../../images/load-icon.png";
 
 class HomePage extends React.Component<any, any> {
   constructor(props: any) {
@@ -57,6 +60,14 @@ class HomePage extends React.Component<any, any> {
               ))}
             </div>
           ))}
+          <div className="btns-container">
+            <RoundButton
+              icon={Load}
+              name="load"
+              style={{ textAlign: "center", marginLeft: 130 }}
+            />
+            <RoundButton icon={Shuffle} name="shuffle" />
+          </div>
         </div>
       </div>
     );
