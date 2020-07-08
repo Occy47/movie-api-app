@@ -57,6 +57,7 @@ class HomePage extends React.Component<any, any> {
                   title={movie.title}
                   movieSrc={movie.src}
                   rating={movie.rating}
+                  movieRating={movie.rating}
                 />
               ))}
             </div>
