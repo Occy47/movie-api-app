@@ -4,6 +4,7 @@ import "./home.scss";
 import RoundButton from "./components/RoundButton";
 import Shuffle from "../../images/shuffle-icon.png";
 import Load from "../../images/load-icon.png";
+import HeaderBar from "../../components/HeaderBar";
 
 class HomePage extends React.Component<any, any> {
   constructor(props: any) {
@@ -47,7 +48,7 @@ class HomePage extends React.Component<any, any> {
     return (
       <div className="layout">
         <div className="layout-core">
-          <div>Home Page</div>
+          <HeaderBar title="Movie API" />
           {rowsOfMovies.map((row: any) => (
             <div className="flex-container">
               {row.map((movie: any) => (
