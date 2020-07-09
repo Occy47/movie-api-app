@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
+
 .layout {
   background-color: grey;
   height: 100vh;
@@ -17,18 +19,20 @@
 .img-container {
   margin: 10px;
   width: 200px;
-  height: 200px;
+  height: 280px;
   border: solid 1px yellow;
 }
 
 .card {
-  margin: 40px;
+  margin: 20px;
   width: 220px;
-  height: 300px;
+  height: 370px;
   border: solid 1px yellow;
+  background-color: black;
 }
 
 .card-text {
+  font-family: "Architects Daughter", cursive;
   margin: 10px;
   color: white;
 }
@@ -54,6 +58,7 @@
   font-weight: 600;
   padding: 10px 10px;
   position: relative;
-  right: -100px;
+  right: -180px;
   top: -10px;
+  z-index: 1;
 }

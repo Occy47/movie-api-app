@@ -8,12 +8,21 @@ class MovieCard extends React.Component<any, any> {
       <div className="">
         <div className="card">
           <div className="img-container">
-            <img src={this.props.movieSrc} alt="myimage" />
             <CardBadge rating={this.props.movieRating} />
+            <img
+              style={{
+                position: "relative",
+                top: -21,
+                height: 280,
+                width: 200,
+              }}
+              src={this.props.movieSrc}
+              alt="myimage"
+            />
           </div>
           <div className="card-text">
-            <p>{this.props.title}</p>
-            <p>{this.props.rating}</p>
+            <div>{this.props.title}</div>
+            <div>{this.props.language}</div>
           </div>
         </div>
       </div>
