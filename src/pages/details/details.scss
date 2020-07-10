@@ -2,13 +2,13 @@
 
 .layout {
   background-color: grey;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .layout-core {
   background-color: #333232;
-  height: 100vh;
   margin: 0px 250px 0px 250px;
+  min-height: 100vh;
 }
 
 .details-title {
@@ -29,11 +29,11 @@
 }
 
 .details-description-container {
-  position: relative;
-  top: -125px;
-  left: -1px;
+  position: absolute;
+  bottom: 372px;
+  left: 330px;
   width: 650px;
-  height: 120px;
+  min-height: 120px;
   border: solid 1px yellow;
   background-color: white;
 }
@@ -48,4 +48,15 @@
   font-family: "Architects Daughter", cursive;
   font-size: 18px;
   color: white;
+}
+
+.star-rating-checked {
+  color: yellow;
+  margin-right: 5px;
+}
+
+.star-rating-unchecked {
+  color: black;
+  font-size: 40px;
+  margin-right: 15px;
 }

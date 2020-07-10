@@ -1,6 +1,7 @@
 import * as React from "react";
 import HeaderBar from "../../components/HeaderBar";
 import "./details.scss";
+import StarRating from "./components/StarRating";
 
 class DetailsPage extends React.Component<any, any> {
   constructor(props: any) {
@@ -27,7 +28,6 @@ class DetailsPage extends React.Component<any, any> {
       src,
       name,
     } = this.state;
-    console.log(this.state.description);
     return (
       <div className="layout">
         <div className="layout-core">
@@ -47,10 +47,19 @@ class DetailsPage extends React.Component<any, any> {
               </div>
             </div>
             <div className="details-movie-stats">
-              <p>
-                <strong>Rating: </strong>
-                {rating}
-              </p>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  height: 45,
+                }}
+              >
+                <p>
+                  <strong>Rating: </strong>
+                  {rating}
+                </p>
+                <StarRating />
+              </div>
               <p>
                 <strong>Popularity: </strong>
                 {popularity}
