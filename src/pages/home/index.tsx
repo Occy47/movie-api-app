@@ -2,6 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import MovieCard from "./components/MovieCard";
 import "./home.scss";
+import NoImage from "../../images/not_available.png";
 import RoundButton from "./components/RoundButton";
 import Shuffle from "../../images/shuffle-icon.png";
 import Load from "../../images/load-icon.png";
@@ -13,6 +14,7 @@ class HomePage extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
+      newMovies: [],
       movies: [
         {
           id: "1",
@@ -76,33 +78,42 @@ class HomePage extends React.Component<any, any> {
         },
       ],
       rows: [],
+      randomMovies: [55, 82, 112, 251, 289, 550],
     };
     this.handleMakeRow = this.handleMakeRow.bind(this);
     this.handleGetMovies = this.handleGetMovies.bind(this);
     this.handleGetRows = this.handleGetRows.bind(this);
     this.handleGetYear = this.handleGetYear.bind(this);
+    this.handleGetRandomMovies = this.handleGetRandomMovies.bind(this);
+    this.handleGetMoreMovies = this.handleGetMoreMovies.bind(this);
   }
 
   componentDidMount() {
-    this.handleGetMovies();
-    setTimeout(() => this.handleGetRows(), 1000);
+    this.handleGetRandomMovies();
+    setTimeout(() => this.handleGetMovies(), 800);
+    setTimeout(() => this.handleGetRows(), 1200);
   }
 
   handleGetMovies() {
-    var randomMovies = [55, 82, 112, 251, 289, 550];
-    var newMoviesArray: any = [];
-    randomMovies.map((id: any) => {
+    var randomMovies = this.state.randomMovies;
+    var newMoviesArray: object[] = this.state.newMovies;
+    randomMovies.map((id: number) => {
       fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${MY_API_KEY}`)
         .then((data) => data.json())
         .then((data) => {
-          newMoviesArray.push(data);
+          if (data.status_code === 34) {
+            console.log("no movie");
+          } else {
+            newMoviesArray.push(data);
+          }
         });
+      return null;
     });
 
     this.setState({ movies: newMoviesArray });
   }
 
-  handleMakeRow(movies: any) {
+  handleMakeRow(movies: object[]) {
     var numOfRows = movies.length / 3;
     var arraysOfRows = [];
     var start = 0;
@@ -119,8 +130,9 @@ class HomePage extends React.Component<any, any> {
 
   handleGetRows() {
     const { movies } = this.state;
+    console.log("moves from get rows:", movies);
     const newRows = this.handleMakeRow(movies);
-
+    console.log("new rows: ", newRows);
     this.setState({ rows: newRows });
   }
 
@@ -131,9 +143,26 @@ class HomePage extends React.Component<any, any> {
     return year;
   }
 
+  handleGetRandomMovies() {
+    var randomMovies = [];
+    var randomNum;
+    var i;
+    for (i = 0; i < 6; i++) {
+      randomNum = Math.floor(Math.random() * Math.floor(85550));
+      randomMovies.push(randomNum);
+    }
+    this.setState({ randomMovies: randomMovies });
+  }
+
+  handleGetMoreMovies() {
+    this.handleGetRandomMovies();
+    setTimeout(() => this.handleGetMovies(), 800);
+    setTimeout(() => this.handleGetRows(), 1200);
+  }
+
   render() {
-    const { movies, rows } = this.state;
-    console.log("movies: ", movies, rows);
+    const { movies, rows, randomMovies } = this.state;
+    console.log("movies: ", movies, rows, randomMovies);
     return (
       <div className="layout">
         <div className="layout-core">
@@ -152,7 +181,7 @@ class HomePage extends React.Component<any, any> {
                       rating: movie.vote_average,
                       popularity: movie.popularity,
                       language: movie.original_language,
-                      prod_companies: movie.production_companies[0].name,
+                      prod_companies: movie.production_companies.name,
                       src: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`,
                     },
                   }}
@@ -163,7 +192,11 @@ class HomePage extends React.Component<any, any> {
                     title={`${movie.original_title} (${this.handleGetYear(
                       movie.release_date
                     )})`}
-                    movieSrc={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                    movieSrc={
+                      movie.poster_path === null
+                        ? NoImage
+                        : `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+                    }
                     language={`Language: ${movie.original_language}`}
                     movieRating={movie.vote_average}
                   />
@@ -176,9 +209,13 @@ class HomePage extends React.Component<any, any> {
               icon={Load}
               name="load"
               style={{ textAlign: "center", marginLeft: 130 }}
+              onClick={() => this.handleGetMoreMovies()}
+            />
+            <RoundButton
+              icon={Shuffle}
+              name="shuffle"
               onClick={() => this.handleGetRows()}
             />
-            <RoundButton icon={Shuffle} name="shuffle" />
           </div>
         </div>
       </div>

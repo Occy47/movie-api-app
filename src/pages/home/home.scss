@@ -2,13 +2,13 @@
 
 .layout {
   background-color: grey;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .layout-core {
   background-color: #333232;
-  height: 100vh;
   margin: 0px 250px 0px 250px;
+  min-height: 100vh;
 }
 
 .flex-container {
@@ -26,7 +26,7 @@
 .card {
   margin: 20px;
   width: 220px;
-  height: 370px;
+  min-height: 370px;
   border: solid 1px yellow;
   background-color: black;
 }
