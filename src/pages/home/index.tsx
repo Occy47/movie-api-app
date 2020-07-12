@@ -174,6 +174,7 @@ class HomePage extends React.Component<any, any> {
                   to={{
                     pathname: `/details/${movie.id}`,
                     state: {
+                      id: movie.id,
                       title: `${movie.original_title} (${this.handleGetYear(
                         movie.release_date
                       )})`,
@@ -181,7 +182,7 @@ class HomePage extends React.Component<any, any> {
                       rating: movie.vote_average,
                       popularity: movie.popularity,
                       language: movie.original_language,
-                      prod_companies: movie.production_companies.name,
+                      prod_companies: movie.production_companies,
                       src: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`,
                     },
                   }}

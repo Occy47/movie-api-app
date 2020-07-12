@@ -7,6 +7,7 @@ class DetailsPage extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
+      id: this.props.location.state.id,
       title: this.props.location.state.title,
       description: this.props.location.state.description,
       rating: this.props.location.state.rating,
@@ -19,6 +20,7 @@ class DetailsPage extends React.Component<any, any> {
   }
   render() {
     const {
+      id,
       title,
       description,
       rating,
@@ -28,6 +30,7 @@ class DetailsPage extends React.Component<any, any> {
       src,
       name,
     } = this.state;
+    console.log(prod_companies[0]?.name);
     return (
       <div className="layout">
         <div className="layout-core">
@@ -58,7 +61,7 @@ class DetailsPage extends React.Component<any, any> {
                   <strong>Rating: </strong>
                   {rating}
                 </p>
-                <StarRating />
+                <StarRating movie_id={id} />
               </div>
               <p>
                 <strong>Popularity: </strong>
@@ -68,10 +71,12 @@ class DetailsPage extends React.Component<any, any> {
                 <strong>Language: </strong>
                 {language}
               </p>
-              <p>
+              <div>
                 <strong>Prodaction companies: </strong>
-                {prod_companies}
-              </p>
+                {prod_companies?.map((company: any) => (
+                  <p style={{ margin: 10 }}>{company.name}</p>
+                ))}
+              </div>
             </div>
           </div>
         </div>

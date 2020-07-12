@@ -52,11 +52,21 @@
 
 .star-rating-checked {
   color: yellow;
-  margin-right: 5px;
+  font-size: 40px;
+  margin-right: 15px;
+  cursor: pointer;
 }
 
 .star-rating-unchecked {
   color: black;
   font-size: 40px;
   margin-right: 15px;
+  cursor: pointer;
+}
+
+.star-rating-unchecked:hover {
+  color: yellow;
+  font-size: 40px;
+  margin-right: 15px;
+  cursor: pointer;
 }
