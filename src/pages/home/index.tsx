@@ -7,6 +7,7 @@ import RoundButton from "./components/RoundButton";
 import Shuffle from "../../images/shuffle-icon.png";
 import Load from "../../images/load-icon.png";
 import HeaderBar from "../../components/HeaderBar";
+import MovieRoulleteModal from "./components/MovieRouletteModal";
 
 const MY_API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -79,17 +80,19 @@ class HomePage extends React.Component<any, any> {
       ],
       rows: [],
       randomMovies: [55, 82, 112, 251, 289, 550],
+      modalVisible: false,
     };
     this.handleMakeRow = this.handleMakeRow.bind(this);
     this.handleGetMovies = this.handleGetMovies.bind(this);
     this.handleGetRows = this.handleGetRows.bind(this);
     this.handleGetYear = this.handleGetYear.bind(this);
-    this.handleGetRandomMovies = this.handleGetRandomMovies.bind(this);
+    this.handleGetRandomMovieIds = this.handleGetRandomMovieIds.bind(this);
     this.handleGetMoreMovies = this.handleGetMoreMovies.bind(this);
+    this.showModal = this.showModal.bind(this);
   }
 
   componentDidMount() {
-    this.handleGetRandomMovies();
+    this.handleGetRandomMovieIds();
     setTimeout(() => this.handleGetMovies(), 800);
     setTimeout(() => this.handleGetRows(), 1200);
   }
@@ -143,11 +146,11 @@ class HomePage extends React.Component<any, any> {
     return year;
   }
 
-  handleGetRandomMovies() {
+  handleGetRandomMovieIds() {
     var randomMovies = [];
     var randomNum;
     var i;
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < 12; i++) {
       randomNum = Math.floor(Math.random() * Math.floor(85550));
       randomMovies.push(randomNum);
     }
@@ -155,13 +158,29 @@ class HomePage extends React.Component<any, any> {
   }
 
   handleGetMoreMovies() {
-    this.handleGetRandomMovies();
+    this.handleGetRandomMovieIds();
     setTimeout(() => this.handleGetMovies(), 800);
     setTimeout(() => this.handleGetRows(), 1200);
   }
 
+  showModal() {
+    var visiblity = this.state.modalVisible;
+    this.setState({ modalVisible: !visiblity });
+  }
+
+  handleGetMoviesByGenre(genre: string) {
+    fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${MY_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=1990-01-01&primary_release_date.lte=1999-12-31&vote_average.gte=6&with_genres=${genre}`
+    )
+      .then((data) => data.json())
+      .then((data) => {
+        this.setState({ movies: data.results, modalVisible: false });
+      });
+    setTimeout(() => this.handleGetRows(), 1200);
+  }
+
   render() {
-    const { movies, rows, randomMovies } = this.state;
+    const { movies, rows, randomMovies, modalVisible } = this.state;
     console.log("movies: ", movies, rows, randomMovies);
     return (
       <div className="layout">
@@ -210,14 +229,21 @@ class HomePage extends React.Component<any, any> {
               icon={Load}
               name="load"
               style={{ textAlign: "center", marginLeft: 130 }}
-              onClick={() => this.handleGetMoreMovies()}
+              onClick={this.handleGetMoreMovies}
             />
             <RoundButton
               icon={Shuffle}
               name="shuffle"
-              onClick={() => this.handleGetRows()}
+              onClick={this.showModal}
             />
           </div>
+          <MovieRoulleteModal
+            show={modalVisible}
+            handleClose={this.showModal}
+            rollButtonClick={(genre: string) =>
+              this.handleGetMoviesByGenre(genre)
+            }
+          />
         </div>
       </div>
     );

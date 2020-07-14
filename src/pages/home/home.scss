@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
 
+$cartoon-font: "Architects Daughter", cursive;
+
 .layout {
   background-color: grey;
   min-height: 100vh;
@@ -32,7 +34,7 @@
 }
 
 .card-text {
-  font-family: "Architects Daughter", cursive;
+  font-family: $cartoon-font;
   margin: 10px;
   color: white;
 }
@@ -62,4 +64,72 @@
   right: -180px;
   top: -10px;
   z-index: 1;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+  font-family: $cartoon-font;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 350px;
+  height: 400px;
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
+.modal-title {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.modal-btns-container {
+  margin: 15px;
+}
+
+.modal-btn {
+  margin-top: 20px;
+}
+
+.roll-btn {
+  font-family: $cartoon-font;
+  font-size: 20px;
+  margin-top: 40px;
+  width: 350px;
+  height: 50px;
+  background-color: rgb(28, 90, 206);
+  color: white;
+}
+
+.close {
+  color: rgb(161, 161, 161);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: rgb(30, 90, 255);
+  text-decoration: none;
+  cursor: pointer;
 }
