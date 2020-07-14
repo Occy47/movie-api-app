@@ -30,7 +30,6 @@ class DetailsPage extends React.Component<any, any> {
       src,
       name,
     } = this.state;
-    console.log(prod_companies[0]?.name);
     return (
       <div className="layout">
         <div className="layout-core">
@@ -73,9 +72,11 @@ class DetailsPage extends React.Component<any, any> {
               </p>
               <div>
                 <strong>Prodaction companies: </strong>
-                {prod_companies?.map((company: any) => (
-                  <p style={{ margin: 10 }}>{company.name}</p>
-                ))}
+                <span>
+                  {prod_companies?.map((company: any) => (
+                    <span style={{ margin: 10 }}>{company.name},</span>
+                  ))}
+                </span>
               </div>
             </div>
           </div>

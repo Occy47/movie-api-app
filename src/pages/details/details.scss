@@ -1,7 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
 
+$cartoon-font: "Architects Daughter", cursive;
+$color-grey: "#808080";
+
 .layout {
-  background-color: grey;
+  background-color: $color-grey;
   min-height: 100vh;
 }
 
@@ -12,7 +15,7 @@
 }
 
 .details-title {
-  font-family: "Architects Daughter", cursive;
+  font-family: $cartoon-font;
   font-size: 25px;
   color: white;
   margin-bottom: 10px;
@@ -39,13 +42,13 @@
 }
 
 .details-description-text {
-  font-family: "Architects Daughter", cursive;
+  font-family: $cartoon-font;
   font-size: 15px;
   margin: 10px;
 }
 
 .details-movie-stats {
-  font-family: "Architects Daughter", cursive;
+  font-family: $cartoon-font;
   font-size: 18px;
   color: white;
 }

@@ -2,7 +2,8 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import MovieCard from "./components/MovieCard";
 import "./home.scss";
-import NoImage from "../../images/not_available.png";
+import NoCardImage from "../../images/not_available.png";
+import NoDetailsImage from "../../images/not_available_details.png";
 import RoundButton from "./components/RoundButton";
 import Shuffle from "../../images/shuffle-icon.png";
 import Load from "../../images/load-icon.png";
@@ -169,6 +170,7 @@ class HomePage extends React.Component<any, any> {
   }
 
   handleGetMoviesByGenre(genre: string) {
+    this.setState({ isLoading: true });
     fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${MY_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=1990-01-01&primary_release_date.lte=1999-12-31&vote_average.gte=6&with_genres=${genre}`
     )
@@ -177,11 +179,11 @@ class HomePage extends React.Component<any, any> {
         this.setState({ movies: data.results, modalVisible: false });
       });
     setTimeout(() => this.handleGetRows(), 1200);
+    this.setState({ isLoading: false });
   }
 
   render() {
-    const { movies, rows, randomMovies, modalVisible } = this.state;
-    console.log("movies: ", movies, rows, randomMovies);
+    const { rows, modalVisible } = this.state;
     return (
       <div className="layout">
         <div className="layout-core">
@@ -202,7 +204,10 @@ class HomePage extends React.Component<any, any> {
                       popularity: movie.popularity,
                       language: movie.original_language,
                       prod_companies: movie.production_companies,
-                      src: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`,
+                      src:
+                        movie.backdrop_path === null
+                          ? NoDetailsImage
+                          : `https://image.tmdb.org/t/p/original${movie.backdrop_path}`,
                     },
                   }}
                   style={{ textDecoration: "none" }}
@@ -214,7 +219,7 @@ class HomePage extends React.Component<any, any> {
                     )})`}
                     movieSrc={
                       movie.poster_path === null
-                        ? NoImage
+                        ? NoCardImage
                         : `https://image.tmdb.org/t/p/w200${movie.poster_path}`
                     }
                     language={`Language: ${movie.original_language}`}
