@@ -2,7 +2,12 @@ import * as React from "react";
 import CardBadge from "./CardBadge";
 import "../home.scss";
 
-class MovieCard extends React.Component<any, any> {
+export interface MovieCardProps {
+  movieRating: number;
+  movieSrc: string;
+}
+
+class MovieCard extends React.Component<any, MovieCardProps> {
   render() {
     return (
       <div className="">

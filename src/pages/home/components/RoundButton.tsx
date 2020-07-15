@@ -1,7 +1,12 @@
 import * as React from "react";
 import "../home.scss";
 
-class RoundButton extends React.Component<any, any> {
+export interface RoundButtonProps {
+  icon: string;
+  name: string;
+}
+
+class RoundButton extends React.Component<any, RoundButtonProps> {
   render() {
     return (
       <div style={this.props.style}>

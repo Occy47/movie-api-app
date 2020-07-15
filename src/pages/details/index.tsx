@@ -3,7 +3,19 @@ import HeaderBar from "../../components/HeaderBar";
 import "./details.scss";
 import StarRating from "./components/StarRating";
 
-class DetailsPage extends React.Component<any, any> {
+export interface DetailsProps {
+  id: number;
+  title: string;
+  description: string;
+  rating: number;
+  popularity: number;
+  language: string;
+  prod_companies?: Array<object>;
+  src: string;
+  name: string;
+}
+
+class DetailsPage extends React.Component<any, DetailsProps> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -30,6 +42,7 @@ class DetailsPage extends React.Component<any, any> {
       src,
       name,
     } = this.state;
+
     return (
       <div className="layout">
         <div className="layout-core">

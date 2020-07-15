@@ -21,6 +21,8 @@ class StarRating extends React.Component<any, any> {
       ],
     };
   }
+
+  // Makes event listeners for each star element
   componentDidMount() {
     const { starsId } = this.state;
     starsId.forEach((id: string) => {
@@ -40,6 +42,7 @@ class StarRating extends React.Component<any, any> {
     });
   }
 
+  // Recieves string parametar and returns number equivalent
   handleGetNumberFromString(string: string) {
     var starNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     var stringIndex = this.state.starsId.indexOf(string);
@@ -48,6 +51,7 @@ class StarRating extends React.Component<any, any> {
     return numberIndex;
   }
 
+  // Creates array of star elements beggining with 1st star and ending with hovered star, then changes css class to checked for each element
   handleGetStarRating(e: any) {
     var endStar = e.target.id;
     var checkedStars = this.state.starsId.slice(
@@ -68,6 +72,7 @@ class StarRating extends React.Component<any, any> {
     });
   }
 
+  // On mouse out changes css class back to unchecked for all star elements
   handleRemoveStarRating() {
     const { starsId } = this.state;
     starsId.forEach((star: string) => {
@@ -81,6 +86,7 @@ class StarRating extends React.Component<any, any> {
     });
   }
 
+  // Rates selected movie with score from 1 to 10
   handleRateMovie(e: any) {
     var endStar = this.handleGetNumberFromString(e.target.id);
     const requestOptions = {
@@ -96,6 +102,7 @@ class StarRating extends React.Component<any, any> {
     console.log(this.props.movie_id);
   }
 
+  // Removes all event listeners
   componentWillUnmount() {
     const { starsId } = this.state;
     starsId.forEach((id: string) => {

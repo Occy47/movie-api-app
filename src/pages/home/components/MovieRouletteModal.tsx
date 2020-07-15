@@ -1,6 +1,18 @@
 import * as React from "react";
 import "../home.scss";
 
+export interface MovieRouletteModalState {
+  show: boolean;
+  rollButtonClick: Function;
+  genre: string;
+  handleClose: Function;
+}
+
+export interface MovieRouletteModalProps {
+  show: boolean;
+  genre: string;
+}
+
 class MovieRouletteModal extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
